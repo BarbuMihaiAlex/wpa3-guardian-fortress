@@ -1,6 +1,9 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -13,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 210 100% 50%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -35,19 +38,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -93,9 +89,76 @@
 @layer base {
   * {
     @apply border-border;
+    font-family: 'Inter', sans-serif;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+}
+
+/* Custom components */
+@layer components {
+  .glass-panel {
+    @apply backdrop-blur-md bg-white/80 border border-white/20 shadow-glass;
+  }
+  
+  .router-button {
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 
+           bg-router-blue text-white hover:bg-router-blue-light 
+           active:scale-[0.98] shadow-button;
+  }
+  
+  .router-input {
+    @apply px-3 py-2 rounded-md border border-router-gray
+           focus:outline-none focus:ring-2 focus:ring-router-blue
+           focus:border-transparent transition-all duration-200
+           bg-white shadow-input;
+  }
+  
+  .router-card {
+    @apply bg-white rounded-lg p-6 shadow-card
+           hover:shadow-card-hover transition-all duration-300;
+  }
+  
+  .router-panel-header {
+    @apply border-b border-router-gray pb-4 mb-6 flex justify-between items-center;
+  }
+  
+  .step-indicator {
+    @apply flex h-8 w-8 items-center justify-center rounded-full 
+           text-white font-medium text-sm;
+  }
+}
+
+/* Custom animations */
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.slide-enter {
+  transform: translateX(100%);
+}
+.slide-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-out;
+}
+.slide-exit {
+  transform: translateX(0);
+}
+.slide-exit-active {
+  transform: translateX(-100%);
+  transition: transform 300ms ease-out;
 }
